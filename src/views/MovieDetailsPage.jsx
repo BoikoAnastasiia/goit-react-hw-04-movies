@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SearchBar from '../components/Searchbar';
-import movieApi from '../services/movie-api';
-
-const apiAccess =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZGQ3NjAwYTdhZTg2MzU4MWRjMTQ4NWNjNTQyMzBjMyIsInN1YiI6IjYwNzQ1MDEwNjU2ODZlMDAyOTZlNmIxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZAKARzjw5gG6Pq_bhUDFDlHW0PDgn4hdrkMiweyJwUo';
+import movieApi from '../services/single-movie-api';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -32,10 +29,8 @@ class MovieDetailsPage extends Component {
     const { currentPage, searchQuery } = this.state;
     const options = { searchQuery, currentPage };
 
-    this.setState({ isLoading: true });
-
     movieApi
-      .fetchPics(options)
+      .fetchMovies(options)
       .then(({ hits }) => {
         this.setState(prevState => ({
           pics: [...prevState.pics, ...hits],

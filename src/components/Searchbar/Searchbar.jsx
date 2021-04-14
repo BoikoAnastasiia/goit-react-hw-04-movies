@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Searchbar extends Component {
-  state = { query: "" };
+  state = { query: '' };
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ query: e.currentTarget.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
     this.props.onSubmit(this.state.query);
-    this.setState({ query: "" });
+    this.setState({ query: '' });
   };
 
   render() {
@@ -29,7 +29,7 @@ class Searchbar extends Component {
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
+            placeholder="Search movie"
           />
         </form>
       </header>
