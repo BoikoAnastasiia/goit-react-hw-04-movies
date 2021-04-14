@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Container from '../Container';
 import React, { Component } from 'react';
+import api from '../../apiKey';
 
 class PopularMovies extends Component {
   state = {
