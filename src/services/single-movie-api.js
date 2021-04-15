@@ -2,10 +2,10 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { apiKey } from './apiKey.js';
 
-const fetchSingleMovie = ({ searchQuery = '' }) => {
+const fetchSingleMovie = movieId => {
   return axios
     .get(
-      `https://api.themoviedb.org/3/${searchQuery}/movie?api_key=${apiKey}&language=en-US&page=1&include_adult=false
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}
 `,
     )
     .then(response => response.results)
