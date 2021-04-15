@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
 import { apiKey } from '../services/apiKey';
 
@@ -33,7 +32,7 @@ class MovieDetailsPage extends Component {
       genres,
     } = this.state;
 
-    console.dir(genres);
+    console.log(genres);
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
 
     return (
@@ -44,6 +43,7 @@ class MovieDetailsPage extends Component {
           </div>
           <div className="singleMovieDescription">
             <h1> {title}</h1>
+            {genres ? {genres.map(genre => genre.name).join(' ,')} : null }
             {/* <p> {genres.map(genre => genre.name).join(' , ')} </p> */}
             <span>👁 {vote_count} </span>
             <span>⭐️ {vote_average} </span>
