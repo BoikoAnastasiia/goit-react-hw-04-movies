@@ -202,3 +202,16 @@ nav {
   padding: 3px;
   font-size: 12px;
 }
+
+.singleMovieContainer {
+  display: flex;
+}
+
+.singleMovieDescription {
+  margin-left: 20px;
+  width: 400px;
+}
+
+.singleMovieDescription span {
+  margin-right: 15px;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import SearchBar from '../components/Searchbar';
-import fetchSingleMovie from '../services/single-movie-api';
+
+import axios from 'axios';
+import { apiKey } from '../services/apiKey';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -12,11 +13,14 @@ class MovieDetailsPage extends Component {
     genres: null,
   };
 
-  componentDidMount() {
-    fetchSingleMovie(this.props.match.params.id).then(response =>
-      // this.setState({ ...response }),
-      console.log(...response),
-    );
+  async componentDidMount() {
+    const response = await axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${this.props.match.params.movieId}?api_key=${apiKey}
+`,
+      )
+      .catch(console.log);
+    this.setState({ ...response.data });
   }
 
   render() {
@@ -29,19 +33,23 @@ class MovieDetailsPage extends Component {
       genres,
     } = this.state;
 
+    console.dir(genres);
+    const baseUrl = 'https://image.tmdb.org/t/p/w500';
+
     return (
       <div className="moviesContainer">
-        <h1> {this.props.match.params.movieId} </h1>
-        <span>Views {vote_count} </span>
-        <span>Rate {vote_average} </span>
-        <p>
-          {/* {genres.map(genre => (
-            <span>{genre.name} </span>
-          ))} */}
-        </p>
-        <h1> {title}</h1>
-        <img src={poster_path} alt={title} />
-        <p>{overview}</p>
+        <div className="singleMovieContainer">
+          <div className="singleMoviePic">
+            <img src={baseUrl + poster_path} width="400px" alt={title} />
+          </div>
+          <div className="singleMovieDescription">
+            <h1> {title}</h1>
+            {/* <p> {genres.map(genre => genre.name).join(' , ')} </p> */}
+            <span>👁 {vote_count} </span>
+            <span>⭐️ {vote_average} </span>
+            <p>{overview}</p>
+          </div>
+        </div>
       </div>
     );
   }
