@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SearchBar from '../components/Searchbar';
 import movieApi from '../services/single-movie-api';
+import { apiKey } from '../services/apiKey';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -16,29 +17,24 @@ class MovieDetailsPage extends Component {
   };
 
   async componentDidMount() {
-    const api = 'bdd7600a7ae863581dc1485cc54230c3';
-
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${this.state.id}?${api}`,
+      `https://api.themoviedb.org/3/movie/${this.state.id}?${apiKey}`,
     );
     console.log(response.data);
     this.setState({ ...response.data });
   }
 
-  fetchPics = () => {
-    const { currentPage, searchQuery } = this.state;
-    const options = { searchQuery, currentPage };
-
-    movieApi
-      .fetchMovies(options)
-      .then(({ hits }) => {
-        this.setState(prevState => ({
-          pics: [...prevState.pics, ...hits],
-          currentPage: prevState.currentPage + 1,
-        }));
-      })
-      .catch(error => this.setState({ error }))
-      .finally(() => this.setState({ isLoading: false }));
+  onChangeQuery = query => {
+    this.setState({
+      query: query,
+      id: null,
+      poster_path: null,
+      vote_count: null,
+      title: null,
+      release_date: null,
+      overview: null,
+      vote_average: 0,
+    });
   };
 
   render() {
@@ -50,6 +46,7 @@ class MovieDetailsPage extends Component {
       overview,
       vote_average,
     } = this.state;
+
     return (
       <>
         <h1> {this.props.match.params.movieId} </h1>

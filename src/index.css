@@ -41,8 +41,10 @@ ul {
 }
 
 .NavLink {
-  font-size: 20px;
+  font-size: 13px;
   color: currentColor;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .NavLink--active {
@@ -52,6 +54,7 @@ ul {
 nav {
   background-color: #2a2a2a;
   border-bottom: solid 1px #53dce9;
+  padding: 30px;
 }
 
 .SearchForm {
@@ -110,4 +113,21 @@ nav {
 .SearchForm-input::placeholder {
   font: inherit;
   font-size: 13px;
+}
+
+.routerList {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.routerList:not(:last-child) {
+  margin-right: 30px;
+}
+
+.routerContainer {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
 }
