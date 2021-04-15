@@ -65,9 +65,7 @@ class MoviesPage extends Component {
               props.match.params.movieId,
             );
             console.log('this is movie in route', movie);
-            return movie ? (
-              <MovieDetailsPage {...props} movies={movies} />
-            ) : null;
+            return movie ? <MovieDetailsPage {...props} /> : null;
           }}
         />
       </div>
