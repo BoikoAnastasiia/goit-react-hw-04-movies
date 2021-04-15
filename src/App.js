@@ -36,7 +36,7 @@ const App = () => (
       </Container>
     </nav>
     <Switch>
-      <Route path="/" component={HomePage} />
+      <Route exact path="/" component={HomePage} />
       <Route path="/movies" component={MoviesPage} />
       <Route path="/movies/:movieId" component={MovieDetailsPage} />
       <Redirect to="/" />
