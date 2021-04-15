@@ -9,7 +9,6 @@ class HomePage extends Component {
     const response = await axios
       .get(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`)
       .catch(console.log);
-    // console.log(response.data.results);
     this.setState({ movies: response.data.results });
   }
 
@@ -17,7 +16,7 @@ class HomePage extends Component {
     const { movies } = this.state;
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     return (
-      <div className="homepageMoviesContainer">
+      <div className="moviesContainer">
         <h1 className="homepageMoviesHeader">Trending today</h1>
         <ul className="homepageMoviesList">
           {movies.map(movie => (
