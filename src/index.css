@@ -70,14 +70,14 @@ nav {
 
 .SearchForm-button {
   display: inline-block;
-  width: 48px;
-  height: 48px;
+  width: 35px;
+  height: 35px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
-  background-size: 40%;
+  background-image: url('./components/Searchbar/search_logo.svg');
+  background-size: 50%;
   background-repeat: no-repeat;
   background-position: center;
-  fill: #303f9f;
+  background-color: #fff;
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
@@ -106,6 +106,7 @@ nav {
   font: inherit;
   font-size: 20px;
   border: none;
+  border-bottom: 2px solid rgb(13, 228, 174);
   outline: none;
   padding-left: 4px;
   padding-right: 4px;
@@ -168,7 +169,6 @@ nav {
 
 .ImageGallery {
   display: grid;
-  /* max-width: calc(100vw - 48px); */
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-gap: 16px;
   margin-top: 0;
