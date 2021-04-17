@@ -159,7 +159,6 @@ nav {
 .homepageMoviesList {
   margin-top: 20px;
   display: grid;
-  max-width: calc(100vw - 48px);
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-gap: 16px;
   margin-top: 0;
@@ -254,4 +253,9 @@ nav {
 
 .castReviews {
   display: flex;
+}
+
+.fallback {
+  font-size: 18px;
+  color: #4f908b;
 }

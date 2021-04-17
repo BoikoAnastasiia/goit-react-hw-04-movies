@@ -1,11 +1,23 @@
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
-import HomePage from './views/HomePage';
-import MoviesPage from './views/MoviesPage';
-import MovieDetailsPage from './views/MovieDetailsPage';
+import { Suspense, lazy } from 'react';
 import logo from './Api_logo.svg';
 import ErrorBoundary from './components/error';
 import './index.css';
 import Container from './components/Container';
+
+const HomePage = lazy(() =>
+  import('./views/HomePage.jsx' /* webpackChunkName: "home-page" */),
+);
+
+const MoviesPage = lazy(() =>
+  import('./views/MoviesPage.jsx' /* webpackChunkName: "movies-page" */),
+);
+
+const MovieDetailsPage = lazy(() =>
+  import(
+    './views/MovieDetailsPage.jsx' /* webpackChunkName: "movie-detailsPage" */
+  ),
+);
 
 const App = () => (
   <ErrorBoundary>
@@ -35,12 +47,14 @@ const App = () => (
         </ul>
       </Container>
     </nav>
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/movies" component={MoviesPage} />
-      <Route path="/movies/:movieId" component={MovieDetailsPage} />
-      <Redirect to="/" />
-    </Switch>
+    <Suspense fallback={<h1 className="fallback">Loading...</h1>}>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/movies" component={MoviesPage} />
+        <Route path="/movies/:movieId" component={MovieDetailsPage} />
+        <Redirect to="/" />
+      </Switch>
+    </Suspense>
   </ErrorBoundary>
 );
 
