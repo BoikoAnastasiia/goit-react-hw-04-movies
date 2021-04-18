@@ -286,7 +286,18 @@ td {
 }
 
 .actorName {
-  background-color: rgb(220, 253, 242);
+  background-color: rgb(204, 226, 207);
+
   padding-left: 5px;
-  margin-right: 5px;
+}
+
+.character {
+  background-color: rgb(220, 253, 242);
+
+  padding-left: 5px;
+}
+
+.reviewsAvatar {
+  border-radius: 50%;
+  width: 100px;
 }

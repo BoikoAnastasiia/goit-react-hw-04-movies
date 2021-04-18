@@ -36,7 +36,9 @@ export class Cast extends Component {
                 <td key={name} className="actorName">
                   {name}
                 </td>
-                <td key={character}>{character}</td>
+                <td key={character} className="character">
+                  {character}
+                </td>
               </tr>
             ))}
           </tbody>
