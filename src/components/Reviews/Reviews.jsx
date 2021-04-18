@@ -23,29 +23,37 @@ export class Reviews extends Component {
 
     return (
       <div>
-        {reviews.map(({ author, author_details, content, id }) => (
-          <div>
-            <span role="img" aria-label="star">
-              ⭐️ {author_details.rating} /10
-            </span>
-            <img
-              className="reviewsAvatar"
-              src={
-                author_details.avatar_path.includes('gravatar')
-                  ? author_details.avatar_path.substring(1)
-                  : author_details.avatar_path ||
-                    !author_details.avatar_path.includes('gravatar')
-                  ? baseUrl + author_details.avatar_path
-                  : author_details.avatar_path
-              }
-              alt={author}
-            />
-          </div>
-        ))}
+        {reviews.length > 0
+          ? reviews.map(({ author, author_details, content, id }) => (
+              <ul>
+                <li key={id}>
+                  <span role="img" aria-label="star" className="rate">
+                    ⭐️ {!author_details.rating ? 10 : author_details.rating}{' '}
+                    /10
+                  </span>
+                  <img
+                    className="reviewsAvatar"
+                    src={
+                      author_details.avatar_path &&
+                      author_details.avatar_path.includes('gravatar')
+                        ? author_details.avatar_path.substring(1)
+                        : baseUrl + author_details.avatar_path
+                    }
+                    alt={author}
+                  />
+                  <span className="reviewDescription">{content}</span>
+                </li>
+              </ul>
+            ))
+          : "We don't have any review for this movie so far"}
       </div>
     );
   }
 }
+
+Reviews.defaultProps = {
+  author_details: defaultAvatar,
+};
 
 Reviews.propTypes = {
   name: PropTypes.string,

@@ -4,7 +4,7 @@ import { apiKey } from '../../services/apiKey';
 import PropTypes from 'prop-types';
 import defaultActor from './defaultActor.jpg';
 
-export class Cast extends Component {
+class Cast extends Component {
   state = { cast: [] };
 
   async componentDidMount() {

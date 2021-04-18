@@ -299,5 +299,14 @@ td {
 
 .reviewsAvatar {
   border-radius: 50%;
-  width: 100px;
+  width: 80px;
+  margin-top: 10px;
+}
+
+.reviewDescription {
+  font-size: 12px;
+  width: 600px;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
