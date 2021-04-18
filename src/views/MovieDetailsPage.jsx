@@ -24,6 +24,11 @@ class MovieDetailsPage extends Component {
     this.setState({ ...response.data });
   }
 
+  handleGoBack = () => {
+    const { location, history } = this.props;
+    history.push(location?.state?.from || '/movies');
+  };
+
   render() {
     const {
       poster_path,
@@ -41,7 +46,11 @@ class MovieDetailsPage extends Component {
 
     return (
       <div className="moviesContainer">
-        <button type="button" className="buttonBack"></button>
+        <button
+          type="button"
+          className="buttonBack"
+          onClick={this.handleGoBack}
+        ></button>
         <div className="singleMovieContainer">
           <div className="singleMoviePic">
             <img src={baseUrl + poster_path} width="400px" alt={title} />
@@ -72,7 +81,7 @@ class MovieDetailsPage extends Component {
                 render={props => {
                   const movieId = Number(props.match.params.movieId);
                   console.log(props);
-                  return <Cast {...props} />;
+                  // return <Cast {...props} />;
                   return id === movieId ? <Cast {...props} /> : null;
                 }}
               />
