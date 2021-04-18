@@ -1,6 +1,6 @@
 import Searchbar from '../components/Searchbar';
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import MovieDetailsPage from '../views/MovieDetailsPage';
 import axios from 'axios';
 import { apiKey } from '../services/apiKey';
@@ -10,6 +10,7 @@ class MoviesPage extends Component {
   state = {
     query: '',
     movies: [],
+    // this.props.location.state.query ||
   };
 
   onChangeQuery = query => {
@@ -37,7 +38,7 @@ class MoviesPage extends Component {
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, query } = this.state;
     const { match } = this.props;
 
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
@@ -46,7 +47,17 @@ class MoviesPage extends Component {
         <Searchbar onSubmit={this.onChangeQuery} />
         <ul className="homepageMoviesList">
           {movies.map(movie => (
-            <Link to={`/movies/${movie.id}`} className="homePageLink">
+            <Link
+              to={{
+                pathname: `/movies/${movie.id}`,
+                state: { query },
+                // {
+                //   from: this.props.location,
+                //   search: `${this.props.query}`,
+                // },
+              }}
+              className="homePageLink"
+            >
               <li key={movie.id}>
                 <img
                   src={
@@ -70,7 +81,7 @@ class MoviesPage extends Component {
           render={props => {
             const movieId = Number(props.match.params.movieId);
             const movie = movies.find(({ id }) => id === movieId);
-
+            console.log('props in render', props);
             return movie ? <MovieDetailsPage {...props} /> : null;
           }}
         />
@@ -79,4 +90,4 @@ class MoviesPage extends Component {
   }
 }
 
-export default MoviesPage;
+export default withRouter(MoviesPage);

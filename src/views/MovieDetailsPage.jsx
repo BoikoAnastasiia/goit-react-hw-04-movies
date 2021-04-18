@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { apiKey } from '../services/apiKey';
 import Cast from '../components/Cast';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import Reviews from '../components/Reviews';
 import defaultAvatar from './defaultAvatar.jpg';
 
@@ -29,6 +29,9 @@ class MovieDetailsPage extends Component {
   handleGoBack = () => {
     const { location, history } = this.props;
     history.push(location?.state?.from || '/movies');
+    // history.push(location.state.query || '/movies');
+    // this.props.location.state.query;
+    console.log(location.state.from);
   };
 
   render() {
@@ -111,4 +114,4 @@ class MovieDetailsPage extends Component {
   }
 }
 
-export default MovieDetailsPage;
+export default withRouter(MovieDetailsPage);
