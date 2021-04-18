@@ -4,6 +4,7 @@ import { apiKey } from '../services/apiKey';
 import Cast from '../components/Cast';
 import { Link, Route } from 'react-router-dom';
 import Reviews from '../components/Reviews';
+import defaultAvatar from './defaultAvatar.jpg';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -54,7 +55,11 @@ class MovieDetailsPage extends Component {
           ></button>
           <div className="singleMovieContainer">
             <div className="singleMoviePic">
-              <img src={baseUrl + poster_path} width="400px" alt={title} />
+              <img
+                src={!poster_path ? defaultAvatar : baseUrl + poster_path}
+                width="400px"
+                alt={title}
+              />
             </div>
             <div className="singleMovieDescription">
               <h1 className="movieName"> {title}</h1>

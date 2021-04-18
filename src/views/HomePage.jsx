@@ -25,7 +25,10 @@ class HomePage extends Component {
             <Link
               to={{
                 pathname: `/movies/${movie.id}`,
-                state: { from: this.props.location },
+                state: {
+                  from: this.props.location,
+                  search: `?query=${this.props.query}`,
+                },
               }}
               className="homePageLink"
             >

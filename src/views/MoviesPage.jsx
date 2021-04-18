@@ -1,8 +1,10 @@
 import Searchbar from '../components/Searchbar';
 import React, { Component } from 'react';
-import searhForMovies from '../services/searhForMovies-api';
 import { Link, Route } from 'react-router-dom';
 import MovieDetailsPage from '../views/MovieDetailsPage';
+import axios from 'axios';
+import { apiKey } from '../services/apiKey';
+import defaultAvatar from './defaultAvatar.jpg';
 
 class MoviesPage extends Component {
   state = {
@@ -23,12 +25,16 @@ class MoviesPage extends Component {
     }
   }
 
-  fetchMovies = () => {
+  async fetchMovies() {
     const { query } = this.state;
-    searhForMovies(query).then(results => {
-      this.setState({ movies: results });
-    });
-  };
+    const response = await axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}
+`,
+      )
+      .catch(console.log);
+    this.setState({ movies: response.data.results });
+  }
 
   render() {
     const { movies } = this.state;
@@ -40,10 +46,14 @@ class MoviesPage extends Component {
         <Searchbar onSubmit={this.onChangeQuery} />
         <ul className="homepageMoviesList">
           {movies.map(movie => (
-            <Link to={`movies/${movie.id}`}>
+            <Link to={`/movies/${movie.id}`} className="homePageLink">
               <li key={movie.id}>
                 <img
-                  src={baseUrl + movie.poster_path}
+                  src={
+                    !movie.poster_path
+                      ? defaultAvatar
+                      : baseUrl + movie.poster_path
+                  }
                   className="ImageGalleryItem-image"
                   alt={movie.title}
                 />
