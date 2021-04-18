@@ -86,7 +86,6 @@ class MovieDetailsPage extends Component {
             path={`${match.path}/:movieId/Cast`}
             render={props => {
               const movieId = Number(props.match.params.movieId);
-              console.log(props.location);
 
               return id === movieId ? <Cast {...props} /> : null;
             }}

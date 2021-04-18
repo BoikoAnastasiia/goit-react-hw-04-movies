@@ -12,7 +12,7 @@ class PopularMovies extends Component {
     const response = await axios.get(
       `https://api.themoviedb.org/3/trending/movie/day?api_key=${api}`,
     );
-    console.log(response.data);
+
     this.setState({ movies: response.data });
   }
 

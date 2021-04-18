@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { apiKey } from '../../services/apiKey';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import defaultActor from './defaultActor.jpg';
 
 export class Cast extends Component {
@@ -22,34 +22,36 @@ export class Cast extends Component {
 
     return (
       <div>
-        <tbody>
-          {cast.map(({ name, profile_path, character, credit_id, id }) => (
-            <tr key={credit_id}>
-              <td key={id}>
-                <img src={baseUrl + profile_path} alt={name} width="60" />
-              </td>
-              <td key={name} className="actorName">
-                {name}
-              </td>
-              <td key={character}>{character}</td>
-            </tr>
-          ))}
-        </tbody>
+        <table>
+          <tbody>
+            {cast.map(({ name, profile_path, character, credit_id, id }) => (
+              <tr key={credit_id}>
+                <td key={id}>
+                  <img
+                    src={profile_path ? baseUrl + profile_path : defaultActor}
+                    alt={name}
+                    width="60"
+                  />
+                </td>
+                <td key={name} className="actorName">
+                  {name}
+                </td>
+                <td key={character}>{character}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
-Cast.defaultProps = {
-  profile_path: defaultActor,
-};
-
 Cast.propTypes = {
-  name: propTypes.string.isRequired,
-  profile_path: propTypes.string,
-  character: propTypes.string.isRequired,
-  credit_id: propTypes.string.isRequired,
-  id: propTypes.string.isRequired,
+  name: PropTypes.string,
+  profile_path: PropTypes.string,
+  character: PropTypes.string,
+  credit_id: PropTypes.number,
+  id: PropTypes.number,
 };
 
 export default Cast;
