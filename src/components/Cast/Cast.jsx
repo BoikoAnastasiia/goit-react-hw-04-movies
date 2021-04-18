@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { apiKey } from '../../services/apiKey';
+import propTypes from 'prop-types';
+import defaultActor from './defaultActor.jpg';
 
 export class Cast extends Component {
   state = { cast: [] };
@@ -8,18 +10,46 @@ export class Cast extends Component {
   async componentDidMount() {
     const response = await axios
       .get(
-        `https://api.themoviedb.org/3/movie/${apiKey}/credits?api_key=${apiKey}`,
+        `https://api.themoviedb.org/3/movie/${this.props.match.params.movieId}/credits?api_key=${apiKey}`,
       )
       .catch(console.log);
-    this.setState({ cast: response.data.results });
+
+    this.setState({ cast: response.data.cast });
   }
   render() {
+    const { cast } = this.state;
+    const baseUrl = 'https://image.tmdb.org/t/p/w500';
+
     return (
       <div>
-        <h1>svsdv</h1>
+        <tbody>
+          {cast.map(({ name, profile_path, character, credit_id, id }) => (
+            <tr key={credit_id}>
+              <td key={id}>
+                <img src={baseUrl + profile_path} alt={name} width="60" />
+              </td>
+              <td key={name} className="actorName">
+                {name}
+              </td>
+              <td key={character}>{character}</td>
+            </tr>
+          ))}
+        </tbody>
       </div>
     );
   }
 }
+
+Cast.defaultProps = {
+  profile_path: defaultActor,
+};
+
+Cast.propTypes = {
+  name: propTypes.string.isRequired,
+  profile_path: propTypes.string,
+  character: propTypes.string.isRequired,
+  credit_id: propTypes.string.isRequired,
+  id: propTypes.string.isRequired,
+};
 
 export default Cast;

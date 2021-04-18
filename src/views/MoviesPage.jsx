@@ -60,11 +60,7 @@ class MoviesPage extends Component {
           render={props => {
             const movieId = Number(props.match.params.movieId);
             const movie = movies.find(({ id }) => id === movieId);
-            console.log(
-              'this is  props.match.params.movieId in route',
-              props.match.params.movieId,
-            );
-            console.log('this is movie in route', movie);
+
             return movie ? <MovieDetailsPage {...props} /> : null;
           }}
         />
