@@ -21,7 +21,7 @@ class HomePage extends Component {
         <h1 className="homepageMoviesHeader">Trending today</h1>
         <ul className="homepageMoviesList">
           {movies.map(movie => (
-            <Link to={`movies/${movie.id}`}>
+            <Link to={`movies/${movie.id}`} className="homePageLink">
               <li key={movie.id}>
                 <img
                   src={baseUrl + movie.poster_path}

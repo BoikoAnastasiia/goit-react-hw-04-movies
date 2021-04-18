@@ -134,6 +134,11 @@ nav {
   display: flex;
 }
 
+.homePageLink {
+  text-decoration: none;
+  color: currentColor;
+}
+
 .homepageMovieTitle {
   font-size: 12px;
   font-weight: 700;
