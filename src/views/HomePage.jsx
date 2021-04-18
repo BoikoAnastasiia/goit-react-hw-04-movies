@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Component } from 'react';
 import { apiKey } from '../services/apiKey';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class HomePage extends Component {
   state = { movies: [] };
@@ -16,12 +16,19 @@ class HomePage extends Component {
   render() {
     const { movies } = this.state;
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
+    console.log(this.props.location);
     return (
       <div className="moviesContainer">
         <h1 className="homepageMoviesHeader">Trending today</h1>
         <ul className="homepageMoviesList">
           {movies.map(movie => (
-            <Link to={`movies/${movie.id}`} className="homePageLink">
+            <Link
+              to={{
+                pathname: `/movies/${movie.id}`,
+                state: { from: this.props.location },
+              }}
+              className="homePageLink"
+            >
               <li key={movie.id}>
                 <img
                   src={baseUrl + movie.poster_path}
@@ -29,7 +36,7 @@ class HomePage extends Component {
                   alt={movie.title}
                 />
                 <h2 className="homepageMovieTitle">{movie.title}</h2>
-                <span>
+                <span role="img" aria-label="star">
                   ⭐️ <span className="rate">{movie.vote_average}</span>
                 </span>
               </li>
@@ -41,4 +48,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default withRouter(HomePage);

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { apiKey } from '../../services/apiKey';
 import PropTypes from 'prop-types';
-import defaultAvatar from './defaultAvatar.jpg';
 
 export class Reviews extends Component {
   state = { reviews: [] };
@@ -28,7 +27,7 @@ export class Reviews extends Component {
               <ul>
                 <li key={id}>
                   <span role="img" aria-label="star" className="rate">
-                    ⭐️ {!author_details.rating ? 10 : author_details.rating}{' '}
+                    ⭐️ {!author_details.rating ? 10 : author_details.rating}
                     /10
                   </span>
                   <img
@@ -51,16 +50,11 @@ export class Reviews extends Component {
   }
 }
 
-Reviews.defaultProps = {
-  author_details: defaultAvatar,
-};
-
 Reviews.propTypes = {
-  name: PropTypes.string,
+  author: PropTypes.string.isRequired,
   profile_path: PropTypes.string,
-  character: PropTypes.string,
-  credit_id: PropTypes.number,
-  id: PropTypes.number,
+  author_details: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Reviews;
