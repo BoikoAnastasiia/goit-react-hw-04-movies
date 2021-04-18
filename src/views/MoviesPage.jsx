@@ -8,9 +8,8 @@ import defaultAvatar from './defaultAvatar.jpg';
 
 class MoviesPage extends Component {
   state = {
-    query: '',
+    query: this.props.location.state || '',
     movies: [],
-    // this.props.location.state.query ||
   };
 
   onChangeQuery = query => {
@@ -19,6 +18,18 @@ class MoviesPage extends Component {
       movies: [],
     });
   };
+
+  async componentDidMount() {
+    if (this.state.query.length > 0) {
+      const response = await axios
+        .get(
+          `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${this.state.query}
+`,
+        )
+        .catch(console.log);
+      this.setState({ movies: response.data.results });
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.query !== this.state.query) {
