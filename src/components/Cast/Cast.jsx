@@ -28,7 +28,7 @@ class Cast extends Component {
               <tr key={credit_id}>
                 <td key={id}>
                   <img
-                    src={profile_path ? baseUrl + profile_path : defaultActor}
+                    src={profile_path && baseUrl + profile_path && defaultActor}
                     alt={name}
                     width="60"
                   />
